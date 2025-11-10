@@ -1,0 +1,114 @@
+
+import java.util.Scanner;
+
+public class Principal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Televisao tv = new Televisao("SN123456", "Samsung Smart TV 55\"");
+        
+        System.out.println("SISTEMA DE CONTROLE DE TELEVISÃO");
+       
+        
+        int opcao;
+        
+        do {
+            exibirMenu();
+            System.out.print("\nEscolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine(); 
+            
+            switch (opcao) {
+                case 1:
+                    tv.ligar();
+                    break;
+                    
+                case 2:
+                    tv.desligar();
+                    break;
+                    
+                case 3:
+                    tv.aumentarVolume();
+                    break;
+                    
+                case 4:
+                    tv.diminuirVolume();
+                    break;
+                    
+                case 5:
+                    tv.proximoCanal();
+                    break;
+                    
+                case 6:
+                    tv.canalAnterior();
+                    break;
+                    
+                case 7:
+                    System.out.print("Digite o número do canal: ");
+                    int canal = scanner.nextInt();
+                    tv.trocarCanal(canal);
+                    break;
+                    
+                case 8:
+                    tv.listarCanais();
+                    break;
+                    
+                case 9:
+                    tv.verInformacoes();
+                    break;
+                    
+                case 10:
+                    adicionarCanalManual(scanner, tv);
+                    break;
+                    
+                case 11:
+                    System.out.print("Digite o número do canal a remover: ");
+                    int canalRemover = scanner.nextInt();
+                    tv.removerCanal(canalRemover);
+                    break;
+                    
+                case 0:
+                    System.out.println("Encerrando sistema...");
+                    break;
+                    
+                default:
+                    System.out.println("Opção inválida!");
+            }
+            
+       
+            
+        } while (opcao != 0);
+        
+        scanner.close();
+    }
+    
+    private static void exibirMenu() {
+        System.out.println("\n MENU PRINCIPAL");
+        System.out.println("1 Ligar TV");
+        System.out.println("2 Desligar TV");
+        System.out.println("3 Aumentar Volume");
+        System.out.println("4 Diminuir Volume");
+        System.out.println("5 Próximo Canal");
+        System.out.println("6 Canal Anterior");
+        System.out.println("7 Escolher Canal por Número");
+        System.out.println("8 Listar Todos os Canais");
+        System.out.println("9 Ver Informações da TV");
+        System.out.println("10 Adicionar Canal");
+        System.out.println("11 Remover Canal");
+        System.out.println("0 Sair");
+    }
+    
+    private static void adicionarCanalManual(Scanner scanner, Televisao tv) {
+        System.out.print("Número do canal: ");
+        int numero = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Nome do canal: ");
+        String nome = scanner.nextLine();
+        
+        System.out.print("Categoria: ");
+        String categoria = scanner.nextLine();
+        
+        Canal novoCanal = new Canal(numero, nome, categoria);
+        tv.adicionarCanal(novoCanal);
+    }
+}
